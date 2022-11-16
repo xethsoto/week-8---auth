@@ -13,10 +13,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
 
   runApp(
     MultiProvider(
@@ -43,5 +43,18 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
     );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    if (context.watch<AuthProvider>().isAuthenticated) {
+      return const TodoPage();
+    } else {
+      return const LoginPage();
+    }
   }
 }
